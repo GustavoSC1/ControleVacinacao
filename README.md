@@ -17,6 +17,8 @@ Obs:
 ## Script SQL
 Para utilizar a aplicação, é preciso também criar o banco de dados MySQL.
 Atualizar o  script à medida que o projeto for sendo desenvolvido.
+
+Obs: Infelizmente ainda não descobrimos uma forma eficiente de resetar os dados do banco depois de cada bateria de testes então, antes de iniciar os testes, você precisará dar um ``drop table funcionario;`` e depois um ``create table funcionario...``.
 ```
 create database vacinacao
 default character set utf8
@@ -35,4 +37,6 @@ create table funcionario (
   senha varchar(20) not null,    
   primary key (id)
 )default charset = utf8;
+
+drop table funcionario;
 ```

@@ -11,26 +11,31 @@ public class FuncionarioDao {
 	private EntityManagerFactory entityManagerFactory;
 	private EntityManager entityManager;
 	
+	public FuncionarioDao(EntityManagerFactory entityManagerFactory, EntityManager entityManager) {
+		this.entityManagerFactory = entityManagerFactory;
+		this.entityManager = entityManager;
+	}
+	
 	public void insert(Funcionario funcionario) {
-		entityManagerFactory = Persistence.createEntityManagerFactory("VacinacaoPU");
-		entityManager = entityManagerFactory.createEntityManager();
+		//entityManagerFactory = Persistence.createEntityManagerFactory("VacinacaoPU");
+		//entityManager = entityManagerFactory.createEntityManager();
 		
 		entityManager.getTransaction().begin();
 		entityManager.persist(funcionario);
 		entityManager.getTransaction().commit();
  
-		entityManager.close();
-		entityManagerFactory.close();
+		//entityManager.close();
+		//entityManagerFactory.close();
 	}
 	
 	public Funcionario findById(int id) {		
-		entityManagerFactory = Persistence.createEntityManagerFactory("VacinacaoPU");
-		entityManager = entityManagerFactory.createEntityManager();
+		//entityManagerFactory = Persistence.createEntityManagerFactory("VacinacaoPU");
+		//entityManager = entityManagerFactory.createEntityManager();
 		
 		Funcionario funcionario = entityManager.find(Funcionario.class, id);
 		  		 
-		entityManager.close();
-		entityManagerFactory.close();
+		//entityManager.close();
+		//entityManagerFactory.close();
 		  
 		return funcionario;
 	}

@@ -13,14 +13,16 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import br.com.projeto.dao.FuncionarioDao;
 import br.com.projeto.entities.Funcionario;
 
 public class FuncionarioServiceTest {
-	
-	//private FuncionarioService funcionarioService = new FuncionarioService();
-	
+		
 	private static EntityManagerFactory entityManagerFactory;
 	private EntityManager entityManager;
+	
+	private FuncionarioDao funcionarioDao;
+	private FuncionarioService funcionarioService;
 	
 	@BeforeAll
 	public static void setupClass() {
@@ -35,6 +37,8 @@ public class FuncionarioServiceTest {
 	@BeforeEach
 	public void setup() {
 		entityManager = entityManagerFactory.createEntityManager();
+		funcionarioDao = new FuncionarioDao(entityManagerFactory, entityManager);
+		funcionarioService = new FuncionarioService(funcionarioDao);
 	}
 	
 	@AfterEach
@@ -45,13 +49,11 @@ public class FuncionarioServiceTest {
 	@Test
 	public void deveInserirNovoFuncionario() {
 		Funcionario newFuncionario = new Funcionario(1, "Luciana Clara Bernardes", LocalDate.of(1980, 9, 23), "51722662751", 'F', "Rua Felicidade, 984 - Rio Branco/AC", "763461", "12345678");
-				
-		entityManager.getTransaction().begin();
-		entityManager.persist(newFuncionario);
-		entityManager.getTransaction().commit();
-		
-		Funcionario funcionario = entityManager.find(Funcionario.class, newFuncionario.getId());
-		
+
+		funcionarioService.insert(newFuncionario);
+
+		Funcionario funcionario = funcionarioService.findById(newFuncionario.getId());
+
 		Assertions.assertEquals(funcionario.getId(), 1);
 		Assertions.assertEquals(funcionario.getNome(), "Luciana Clara Bernardes");
 		Assertions.assertEquals(funcionario.getCpf(), "51722662751");

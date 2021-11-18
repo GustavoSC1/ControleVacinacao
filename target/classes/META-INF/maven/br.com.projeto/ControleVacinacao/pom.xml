@@ -23,11 +23,11 @@
 	    <artifactId>hibernate-core</artifactId>
 	    <version>5.4.2.Final</version>
 	</dependency>
-	
+		
 	<dependency>
-   		<groupId>mysql</groupId>
-    	<artifactId>mysql-connector-java</artifactId>
-    	<version>8.0.16</version>
+		<groupId>com.h2database</groupId>
+		<artifactId>h2</artifactId>
+		<version>1.4.200</version>
 	</dependency>
   </dependencies>
   

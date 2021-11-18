@@ -37,7 +37,7 @@ public class FuncionarioServiceTest {
 	@BeforeEach
 	public void setup() {
 		entityManager = entityManagerFactory.createEntityManager();
-		funcionarioDao = new FuncionarioDao(entityManagerFactory, entityManager);
+		funcionarioDao = new FuncionarioDao(entityManager);
 		funcionarioService = new FuncionarioService(funcionarioDao);
 	}
 	

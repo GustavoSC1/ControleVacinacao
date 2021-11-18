@@ -13,30 +13,3 @@ Obs:
 ## Diagramas
 ![Diagrama 1](https://ik.imagekit.io/gustavosc/Teste_Software/diagrama_de_caso_de_uso_K-ZkM0Rqlsx.PNG?updatedAt=1636196834390)
 ![Diagrama 2](https://ik.imagekit.io/gustavosc/Teste_Software/diagrama_mOe5nZLsv.PNG?updatedAt=1636197663795)
-
-## Script SQL
-Para utilizar a aplicação, é preciso também criar o banco de dados MySQL.
-Atualizar o  script à medida que o projeto for sendo desenvolvido.
-
-Obs: Infelizmente ainda não descobrimos uma forma eficiente de resetar os dados do banco depois de cada bateria de testes então, antes de iniciar os testes, você precisará dar um ``drop table funcionario;`` e depois um ``create table funcionario...``.
-```
-create database vacinacao
-default character set utf8
-default collate utf8_general_ci;
-
-use vacinacao;
-
-create table funcionario (
-  id int not null,
-  nome varchar(30) not null,
-  dataNascimento date,
-  cpf varchar(11) not null,
-  sexo enum('M', 'F'),
-  endereco varchar(40) not null,
-  conselhoRegional varchar(6) not null,
-  senha varchar(20) not null,    
-  primary key (id)
-)default charset = utf8;
-
-drop table funcionario;
-```

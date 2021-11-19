@@ -48,11 +48,11 @@ public class FuncionarioServiceTest {
 	
 	@Test
 	public void deveInserirNovoFuncionario() {
-		Funcionario newFuncionario = new Funcionario(1, "Luciana Clara Bernardes", LocalDate.of(1980, 9, 23), "51722662751", 'F', "Rua Felicidade, 984 - Rio Branco/AC", "763461", "12345678");
+		Funcionario funcionario = new Funcionario(1, "Luciana Clara Bernardes", LocalDate.of(1980, 9, 23), "51722662751", 'F', "Rua Felicidade, 984 - Rio Branco/AC", "763461", "12345678");
 
-		funcionarioService.insert(newFuncionario);
+		funcionarioService.insert(funcionario);
 
-		Funcionario funcionario = funcionarioService.findById(newFuncionario.getId());
+		funcionario = funcionarioService.findById(funcionario.getId());
 
 		Assertions.assertEquals(funcionario.getId(), 1);
 		Assertions.assertEquals(funcionario.getNome(), "Luciana Clara Bernardes");

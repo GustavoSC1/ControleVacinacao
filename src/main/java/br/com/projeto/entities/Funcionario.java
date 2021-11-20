@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="funcionario")
@@ -12,12 +14,26 @@ public class Funcionario {
 	
 	@Id
 	private int id;
+	
+	@NotEmpty(message = "O Nome não pode ser vazio")
 	private String nome;
+	
+	@NotNull(message = "A Data de Nascimento não pode ser vazia")
 	private LocalDate dataNascimento;
+	
+	@NotEmpty(message = "O CPF não pode ser vazio")
 	private String cpf;
+	
+	@NotNull(message = "O Sexo não pode ser vazio")
 	private char sexo;
+	
+	@NotEmpty(message = "O Endereço não pode ser vazio")
 	private String endereco;
+	
+	@NotEmpty(message = "O Conselho Regional não pode ser vazio")
 	private String conselhoRegional;
+	
+	@NotEmpty(message = "A Senha não pode ser vazia")
 	private String senha;
 	
 	public Funcionario() {

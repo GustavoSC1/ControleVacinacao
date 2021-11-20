@@ -47,12 +47,15 @@ public class CidadaoDaoTest {
 		
 	@Test
 	public void deveInserirNovoCidadao() {
+		// Cenario
 		Cidadao cidadao = new Cidadao(1, "Julio Renan Galvão", LocalDate.of(1990, 4, 21), "52789792917", 'M', "Rua Rubi, 169 - Guarapari/ES", "797564326757645");
-	
+		
+		// Execução
 		cidadaoDao.insert(cidadao);
 		
 		cidadao = cidadaoDao.findById(cidadao.getId());
 		
+		// Verificação
 		Assertions.assertEquals(cidadao.getId(), 1);
 		Assertions.assertEquals(cidadao.getNome(), "Julio Renan Galvão");
 		Assertions.assertEquals(cidadao.getCpf(), "52789792917");

@@ -46,16 +46,45 @@ public class FuncionarioDaoTest {
 	
 	@Test
 	public void deveInserirNovoFuncionario() {
+		// Cenario
 		Funcionario funcionario = new Funcionario(1, "Luciana Clara Bernardes", LocalDate.of(1980, 9, 23), "51722662751", 'F', "Rua Felicidade, 984 - Rio Branco/AC", "763461", "12345678");
-
+		
+		// Execução
 		funcionarioDao.insert(funcionario);
 
 		funcionario = funcionarioDao.findById(funcionario.getId());
-
+		
+		// Verificação
 		Assertions.assertEquals(funcionario.getId(), 1);
 		Assertions.assertEquals(funcionario.getNome(), "Luciana Clara Bernardes");
 		Assertions.assertEquals(funcionario.getCpf(), "51722662751");
 		Assertions.assertEquals(funcionario.getConselhoRegional(), "763461");
+	}
+	
+	@Test
+	public void retornaTrueSeCpfExiste() {
+		// Cenario
+		String cpf = "51722662751";
+		Funcionario funcionario = new Funcionario(1, "Luciana Clara Bernardes", LocalDate.of(1980, 9, 23), cpf, 'F', "Rua Felicidade, 984 - Rio Branco/AC", "763461", "12345678");
+		funcionarioDao.insert(funcionario);
+		
+		// Execução
+		boolean exists = funcionarioDao.existsByCpf(cpf);
+		
+		// Verificação
+		Assertions.assertTrue(exists);	
+	}
+	
+	@Test
+	public void retornaFalseSeCpfNaoExiste() {
+		// Cenario
+		String cpf = "51722662751";
+		
+		// Execução
+		boolean exists = funcionarioDao.existsByCpf(cpf);
+		
+		// Verificação
+		Assertions.assertFalse(exists);	
 	}
 
 }

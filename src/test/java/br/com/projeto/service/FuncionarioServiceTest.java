@@ -28,14 +28,17 @@ public class FuncionarioServiceTest {
 	
 	@Test
 	public void deveInserirNovoFuncionario() {
+		// Cenario
 		Funcionario funcionario = new Funcionario(1, "Luciana Clara Bernardes", LocalDate.of(1980, 9, 23), "51722662751", 'F', "Rua Felicidade, 984 - Rio Branco/AC", "763461", "12345678");
 		Mockito.when(funcionarioDao.findById(funcionario.getId())).thenReturn(funcionario);		
 		Mockito.doNothing().when(funcionarioDao).insert(funcionario);
 		
+		// Execução
 		funcionarioService.insert(funcionario);
 		
 		funcionario = funcionarioDao.findById(funcionario.getId());
 		
+		// Verificação
 		Assertions.assertEquals(funcionario.getId(), 1);
 		Assertions.assertEquals(funcionario.getNome(), "Luciana Clara Bernardes");
 		Assertions.assertEquals(funcionario.getCpf(), "51722662751");

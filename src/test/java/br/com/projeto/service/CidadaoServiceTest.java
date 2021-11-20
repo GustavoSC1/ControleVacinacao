@@ -28,15 +28,17 @@ public class CidadaoServiceTest {
 	
 	@Test
 	public void deveInserirNovoCidadao() {
+		// Cenario
 		Cidadao cidadao = new Cidadao(1, "Julio Renan Galvão", LocalDate.of(1990, 4, 21), "52789792917", 'M', "Rua Rubi, 169 - Guarapari/ES", "797564326757645");
 		Mockito.when(cidadaoDao.findById(cidadao.getId())).thenReturn(cidadao);		
 		Mockito.doNothing().when(cidadaoDao).insert(cidadao);
 		
-		
+		// Execução
 		cidadaoService.insert(cidadao);
 		
 		cidadao = cidadaoService.findById(cidadao.getId());
 		
+		// Verificação
 		Assertions.assertEquals(cidadao.getId(), 1);
 		Assertions.assertEquals(cidadao.getNome(), "Julio Renan Galvão");
 		Assertions.assertEquals(cidadao.getCpf(), "52789792917");

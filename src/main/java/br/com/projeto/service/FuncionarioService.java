@@ -2,6 +2,7 @@ package br.com.projeto.service;
 
 import br.com.projeto.dao.FuncionarioDao;
 import br.com.projeto.entities.Funcionario;
+import br.com.projeto.exception.BusinessException;
 
 public class FuncionarioService {
 	
@@ -12,6 +13,11 @@ public class FuncionarioService {
 	}
 	
 	public void insert(Funcionario funcionario) {
+		
+		if(funcionarioDao.existsByCpf(funcionario.getCpf())) {
+			throw new BusinessException("CPF já cadastrado");
+		}
+		
 		funcionarioDao.insert(funcionario);
 	}
 	

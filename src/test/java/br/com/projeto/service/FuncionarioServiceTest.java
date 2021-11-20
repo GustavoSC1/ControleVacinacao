@@ -12,6 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import br.com.projeto.dao.FuncionarioDao;
 import br.com.projeto.entities.Funcionario;
+import br.com.projeto.exception.BusinessException;
 
 @ExtendWith(MockitoExtension.class)
 public class FuncionarioServiceTest {
@@ -43,6 +44,22 @@ public class FuncionarioServiceTest {
 		Assertions.assertEquals(funcionario.getNome(), "Luciana Clara Bernardes");
 		Assertions.assertEquals(funcionario.getCpf(), "51722662751");
 		Assertions.assertEquals(funcionario.getConselhoRegional(), "763461");
+	}
+	
+	@Test
+	public void naoDeveInserirFuncionarioComCpfDuplicado() {
+		// Cenário
+		Funcionario funcionario = new Funcionario(1, "Luciana Clara Bernardes", LocalDate.of(1980, 9, 23), "51722662751", 'F', "Rua Felicidade, 984 - Rio Branco/AC", "763461", "12345678");
+		Mockito.when(funcionarioDao.existsByCpf(funcionario.getCpf())).thenReturn(true);	
+		String expectedMessage = "CPF já cadastrado";
+		
+		// Execução
+		Exception exception = Assertions.assertThrows(BusinessException.class, () -> funcionarioService.insert(funcionario));	
+				 
+		String actualMessage = exception.getMessage();
+		
+		Assertions.assertTrue(actualMessage.contains(expectedMessage));
+		
 	}
 	
 	

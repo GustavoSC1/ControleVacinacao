@@ -78,11 +78,12 @@ public class FuncionarioDaoTest {
 	@Test
 	public void retornaFalseSeCpfNaoExiste() {
 		// Cenario
-		String cpf = "51722662751";
+		String cpf = "51722662752";
 		
 		// Execução
 		boolean exists = funcionarioDao.existsByCpf(cpf);
 		
+		System.out.println("Resultado: " + exists);
 		// Verificação
 		Assertions.assertFalse(exists);	
 	}

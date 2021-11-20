@@ -18,7 +18,6 @@ import br.com.projeto.entities.Cidadao;
 
 public class CidadaoDaoTest {
 	
-
 	private static EntityManagerFactory entityManagerFactory;
 	private EntityManager entityManager;
 	

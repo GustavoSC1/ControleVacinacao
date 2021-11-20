@@ -65,8 +65,8 @@ public class FuncionarioDaoTest {
 	public void retornaTrueSeCpfExiste() {
 		// Cenario
 		String cpf = "51722662759";
-		Funcionario funcionario = new Funcionario(1, "Luciana Clara Bernardes", LocalDate.of(1980, 9, 23), cpf, 'F', "Rua Felicidade, 984 - Rio Branco/AC", "763461", "12345678");
-		funcionarioDao.insert(funcionario);
+		Funcionario funcionario = new Funcionario(10, "Luciana Clara Bernardes", LocalDate.of(1980, 9, 23), cpf, 'F', "Rua Felicidade, 984 - Rio Branco/AC", "763461", "12345678");
+		funcionarioDao.insert(funcionario);		
 		
 		// Execução
 		boolean exists = funcionarioDao.existsByCpf(cpf);

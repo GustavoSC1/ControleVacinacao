@@ -29,5 +29,13 @@ public class FuncionarioDao {
 		boolean exists = typedQuery.getSingleResult();
 		return exists;
 	}
+	
+	public boolean login(String cpf, String senha) {
+		String jpql = "select count(f) > 0 from Funcionario f where cpf = :cpfFuncionario and senha = :senhaFuncionario";
+		TypedQuery<Boolean> typedQuery = entityManager.createQuery(jpql, Boolean.class).setParameter("cpfFuncionario", cpf)
+				.setParameter("senhaFuncionario", senha); 
+		boolean exists = typedQuery.getSingleResult();
+		return exists;
+	}
 
 }

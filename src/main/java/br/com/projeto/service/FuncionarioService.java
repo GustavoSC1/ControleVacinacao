@@ -47,5 +47,7 @@ public class FuncionarioService {
 	public Funcionario findById(int id) {		
 		return funcionarioDao.findById(id);
 	}
+	
+	
 
 }

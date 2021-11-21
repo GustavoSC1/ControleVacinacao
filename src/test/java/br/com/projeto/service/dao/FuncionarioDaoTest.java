@@ -87,5 +87,20 @@ public class FuncionarioDaoTest {
 		// Verificação
 		Assertions.assertFalse(exists);	
 	}
+	
+	@Test
+	public void realizaLoginSeCpfESenhaEstiveremCorretos() {
+		// Cenario
+		String cpf = "51722662759";
+		String senha = "12345678";
+		Funcionario funcionario = new Funcionario(8, "Luciana Clara Bernardes", LocalDate.of(1980, 9, 23), cpf, 'F', "Rua Felicidade, 984 - Rio Branco/AC", "763461", senha);
+		funcionarioDao.insert(funcionario);		
+		
+		// Execução
+		boolean exists = funcionarioDao.login(cpf, senha);
+		
+		// Verificação
+		Assertions.assertTrue(exists);	
+	}
 
 }

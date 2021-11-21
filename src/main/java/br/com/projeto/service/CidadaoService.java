@@ -11,8 +11,8 @@ public class CidadaoService {
 		this.cidadaoDao = cidadaoDao;
 	}
 	
-	public void insert(Cidadao funcionario) {
-		cidadaoDao.insert(funcionario);
+	public void insert(Cidadao cidadao) {
+		cidadaoDao.insert(cidadao);
 	}
 	
 	public Cidadao findById(int id) {		

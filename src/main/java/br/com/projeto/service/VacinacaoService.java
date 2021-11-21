@@ -1,5 +1,7 @@
 package br.com.projeto.service;
 
+import java.util.List;
+
 import br.com.projeto.dao.VacinacaoDao;
 import br.com.projeto.entities.Vacinacao;
 
@@ -17,6 +19,10 @@ private VacinacaoDao vacinacaoDao;
 	
 	public Vacinacao findById(int id) {		
 		return vacinacaoDao.findById(id);
+	}
+	
+	public List<Vacinacao> findByCidadao(int id) {		
+		return vacinacaoDao.findByCidadao(id);
 	}
 
 }

@@ -1,9 +1,12 @@
 package br.com.projeto.entities;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,6 +21,9 @@ public class Cidadao {
 	private char sexo;
 	private String endereco;
 	private String cartaoSus;
+	
+	@OneToMany(mappedBy = "cidadao") 
+	private List<Vacinacao> vacinacoes = new ArrayList<>();
 	
 	public Cidadao() {
 		
@@ -63,6 +69,10 @@ public class Cidadao {
 		return cartaoSus;
 	}
 
+	public List<Vacinacao> getVacinacoes() {
+		return vacinacoes;
+	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -90,5 +100,38 @@ public class Cidadao {
 	public void setCartaoSus(String cartaoSus) {
 		this.cartaoSus = cartaoSus;
 	}
-	
+
+	public void setVacinacoes(List<Vacinacao> vacinacoes) {
+		this.vacinacoes = vacinacoes;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cidadao other = (Cidadao) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Cidadao [id=" + id + ", nome=" + nome + ", dataNascimento=" + dataNascimento + ", cpf=" + cpf
+				+ ", sexo=" + sexo + ", endereco=" + endereco + ", cartaoSus=" + cartaoSus + ", vacinacoes="
+				+ vacinacoes + "]";
+	}
+		
 }

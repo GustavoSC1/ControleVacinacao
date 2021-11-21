@@ -1,9 +1,12 @@
 package br.com.projeto.entities;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -35,6 +38,9 @@ public class Funcionario {
 	
 	@NotEmpty(message = "A Senha não pode ser vazia")
 	private String senha;
+	
+	@OneToMany(mappedBy = "funcionario") 
+	private List<Vacinacao> vacinacoes = new ArrayList<>();
 	
 	public Funcionario() {
 		
@@ -85,6 +91,10 @@ public class Funcionario {
 		return senha;
 	}
 
+	public List<Vacinacao> getVacinacoes() {
+		return vacinacoes;
+	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -115,6 +125,39 @@ public class Funcionario {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public void setVacinacoes(List<Vacinacao> vacinacoes) {
+		this.vacinacoes = vacinacoes;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Funcionario other = (Funcionario) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Funcionario [id=" + id + ", nome=" + nome + ", dataNascimento=" + dataNascimento + ", cpf=" + cpf
+				+ ", sexo=" + sexo + ", endereco=" + endereco + ", conselhoRegional=" + conselhoRegional + ", senha="
+				+ senha + ", vacinacoes=" + vacinacoes + "]";
 	}
 		
 }

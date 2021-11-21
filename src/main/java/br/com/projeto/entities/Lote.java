@@ -80,5 +80,33 @@ public class Lote {
 	public void setDataValidade(LocalDate dataValidade) {
 		this.dataValidade = dataValidade;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Lote other = (Lote) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Lote [id=" + id + ", nomeVacina=" + nomeVacina + ", instituicao=" + instituicao + ", numeroLote="
+				+ numeroLote + ", dataFabricacao=" + dataFabricacao + ", dataValidade=" + dataValidade + "]";
+	}	
 	
 }

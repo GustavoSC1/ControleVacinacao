@@ -1,6 +1,9 @@
 package br.com.projeto.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 import br.com.projeto.entities.Vacinacao;
 
@@ -20,6 +23,16 @@ private EntityManager entityManager;
 	public Vacinacao findById(int id) {				
 		Vacinacao vacinacao = entityManager.find(Vacinacao.class, id);
 		return vacinacao;
+	}
+	
+	public List<Vacinacao> findByCidadao(int id) {				
+		String jpql = "select v from Vacinacao v where cidadao_id = :idCidadao";
+		TypedQuery<Vacinacao> typedQuery = entityManager
+						.createQuery(jpql, Vacinacao.class)
+						.setParameter("idCidadao", id);
+		
+		List<Vacinacao>	vacinacoes = typedQuery.getResultList();	
+		return vacinacoes;
 	}
 
 }

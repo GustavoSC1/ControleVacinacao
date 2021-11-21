@@ -1,6 +1,7 @@
 package br.com.projeto.service.dao;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -81,5 +82,45 @@ public class VacinacaoDaoTest {
 		Assertions.assertEquals(vacinacao.getFuncionario(), funcionario);
 		Assertions.assertEquals(vacinacao.getCidadao(), cidadao);
 		Assertions.assertEquals(vacinacao.getLote(), lote);
+	}
+	
+	@Test
+	public void consultarVacinasDeUmCidadao() {
+		Funcionario funcionario = new Funcionario(5, "Sara Benedita Liz Rezende", LocalDate.of(1990, 8, 24), "01731464738", 'F', "Rua Nha Jorda, 441 - Itapecerica da Serra/SP", "757632", "12345678");
+		Cidadao cidadao = new Cidadao(10, "Márcia Antonella Almeida", LocalDate.of(1979, 3, 13), "01165163560", 'F', "Rua Jacaraú, 983 - João Pessoa/PB", "797564876757091");
+		Lote lote  = new Lote(6, "Coronavac", "Instituto Butantan", "J202110017", LocalDate.of(2021, 7, 19), LocalDate.of(2021, 9, 17));
+		Lote lote2  = new Lote(7, "Coronavac", "Instituto Butantan", "J202107050", LocalDate.of(2021, 10, 2), LocalDate.of(2021, 12, 2));
+		
+		funcionarioDao.insert(funcionario);
+		cidadaoDao.insert(cidadao);
+		loteDao.insert(lote);
+		loteDao.insert(lote2);
+		
+		Vacinacao vacinacao = new Vacinacao(2, "Posto de Saúde", "Primeira", LocalDate.of(2021, 8, 12), LocalDate.of(2021, 11, 12), cidadao, lote, funcionario);
+		Vacinacao vacinacao2 = new Vacinacao(3, "Posto de Saúde", "Segunda", LocalDate.of(2021, 11, 12), null, cidadao, lote2, funcionario);
+		
+		// Execução
+		vacinacaoDao.insert(vacinacao);
+		vacinacaoDao.insert(vacinacao2);
+		
+		List<Vacinacao> vacinacoes = vacinacaoDao.findByCidadao(cidadao.getId());
+		
+		// Verificação
+		Assertions.assertEquals(vacinacoes.size(), 2);
+		
+		Assertions.assertEquals(vacinacoes.get(0).getId(), 2);
+		Assertions.assertEquals(vacinacoes.get(0).getEstabelecimentoSaude(), "Posto de Saúde");
+		Assertions.assertEquals(vacinacoes.get(0).getDose(), "Primeira");
+		Assertions.assertEquals(vacinacoes.get(0).getFuncionario(), funcionario);
+		Assertions.assertEquals(vacinacoes.get(0).getCidadao(), cidadao);
+		Assertions.assertEquals(vacinacoes.get(0).getLote(), lote);
+		
+		Assertions.assertEquals(vacinacoes.get(1).getId(), 3);
+		Assertions.assertEquals(vacinacoes.get(1).getEstabelecimentoSaude(), "Posto de Saúde");
+		Assertions.assertEquals(vacinacoes.get(1).getDose(), "Segunda");
+		Assertions.assertEquals(vacinacoes.get(1).getFuncionario(), funcionario);
+		Assertions.assertEquals(vacinacoes.get(1).getCidadao(), cidadao);
+		Assertions.assertEquals(vacinacoes.get(1).getLote(), lote2);
+	
 	}
 }

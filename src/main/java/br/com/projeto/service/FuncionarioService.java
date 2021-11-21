@@ -48,6 +48,10 @@ public class FuncionarioService {
 		return funcionarioDao.findById(id);
 	}
 	
+	public boolean login(String cpf, String senha) {
+		return funcionarioDao.login(cpf, senha);
+	}
+	
 	
 
 }

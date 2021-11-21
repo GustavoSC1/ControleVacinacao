@@ -97,10 +97,10 @@ public class FuncionarioDaoTest {
 		funcionarioDao.insert(funcionario);		
 		
 		// Execução
-		boolean exists = funcionarioDao.login(cpf, senha);
+		boolean loginSucesso = funcionarioDao.login(cpf, senha);
 		
 		// Verificação
-		Assertions.assertTrue(exists);	
+		Assertions.assertTrue(loginSucesso);	
 	}
 
 }

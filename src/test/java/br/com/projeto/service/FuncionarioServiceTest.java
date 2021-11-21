@@ -75,8 +75,20 @@ public class FuncionarioServiceTest {
 		Assertions.assertTrue(mensagemAtual.contains("O Conselho Regional não pode ser vazio"));
 		Assertions.assertTrue(mensagemAtual.contains("O CPF não pode ser vazio"));
 		Assertions.assertTrue(mensagemAtual.contains("A Data de Nascimento não pode ser vazia"));
+	}
+	
+	@Test
+	public void realizaLoginSeCpfESenhaEstiveremCorretos() {
+		// Cenario
+		String cpf = "51722662759";
+		String senha = "12345678";
+		Mockito.when(funcionarioDao.login(cpf, senha)).thenReturn(true);	
 		
+		// Execução
+		boolean loginSucesso = funcionarioService.login(cpf, senha);
 		
+		// Verificação
+		Assertions.assertTrue(loginSucesso);	
 	}
 		
 }

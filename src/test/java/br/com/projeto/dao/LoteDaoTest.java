@@ -64,13 +64,15 @@ public class LoteDaoTest {
 	public void retornaTrueSeNumeroLoteExiste() {
 		// Cenario
 		String numeroLote = "51722662752";
-		
+		Lote lote = new Lote(5, "Coronavac", "Instituto Butantan", numeroLote, LocalDate.of(2021, 10, 23), LocalDate.of(2021, 12, 23));
+		loteDao.insert(lote);	
+
 		// Execução
 		boolean exists = loteDao.existsByNumeroLote(numeroLote);
 		
 		System.out.println("Resultado: " + exists);
 		// Verificação
-		Assertions.assertFalse(exists);	
+		Assertions.assertTrue(exists);	
 	}
 	
 	@Test

@@ -59,5 +59,32 @@ public class CidadaoDaoTest {
 		Assertions.assertEquals(cidadao.getCpf(), "52789792917");
 		Assertions.assertEquals(cidadao.getCartaoSus(), "797564326757645");
 	}
+        
+        @Test
+	public void retornaTrueSeCpfExiste() {
+		// Cenario
+		String cpf = "51722662759";
+		Cidadao cidadao = new Cidadao(11, "Luciana Clara Bernardes", LocalDate.of(1980, 9, 23), cpf, 'F', "Rua Felicidade, 984 - Rio Branco/AC", "12345678");
+		cidadaoDao.insert(cidadao);		
+		
+		// Execução
+		boolean exists = cidadaoDao.existsByCpf(cpf);
+		
+		// Verificação
+		Assertions.assertTrue(exists);	
+	}
+        
+        @Test
+	public void retornaFalseSeCpfNaoExiste() {
+		// Cenario
+		String cpf = "51722662752";
+		
+		// Execução
+		boolean exists = cidadaoDao.existsByCpf(cpf);
+		
+		System.out.println("Resultado: " + exists);
+		// Verificação
+		Assertions.assertFalse(exists);	
+	}
 
 }

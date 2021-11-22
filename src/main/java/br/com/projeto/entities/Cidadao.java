@@ -8,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="cidadao")
@@ -15,11 +18,23 @@ public class Cidadao {
 	
 	@Id
 	private int id;
+        
+        @NotEmpty(message = "O Nome não pode ser vazio")
 	private String nome;
+                
+        @NotNull(message = "A Data de Nascimento não pode ser vazia")        
 	private LocalDate dataNascimento;
+        
+        @NotEmpty(message = "O CPF não pode ser vazio")
 	private String cpf;
-	private char sexo;
+        
+        @NotEmpty(message = "O Endereço não pode ser vazio")
 	private String endereco;
+        
+        @NotNull(message = "O Sexo não pode ser vazio")
+	private char sexo;
+        
+        @NotEmpty(message = "O Cartão Sus não pode ser vazio")
 	private String cartaoSus;
 	
 	@OneToMany(mappedBy = "cidadao") 

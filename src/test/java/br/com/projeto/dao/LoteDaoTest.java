@@ -59,5 +59,31 @@ public class LoteDaoTest {
 		Assertions.assertEquals(lote.getInstituicao(), "Instituto Butantan");
 		Assertions.assertEquals(lote.getNumeroLote(), "J202106025");
 	}
+
+	@Test
+	public void retornaTrueSeNumeroLoteExiste() {
+		// Cenario
+		String numeroLote = "51722662752";
+		
+		// Execução
+		boolean exists = loteDao.existsByNumeroLote(numeroLote);
+		
+		System.out.println("Resultado: " + exists);
+		// Verificação
+		Assertions.assertFalse(exists);	
+	}
+	
+	@Test
+	public void retornaFalseSeNumeroLoteNaoExiste() {
+		// Cenario
+		String numeroLote = "51722662752";
+		
+		// Execução
+		boolean exists = loteDao.existsByNumeroLote(numeroLote);
+		
+		System.out.println("Resultado: " + exists);
+		// Verificação
+		Assertions.assertFalse(exists);	
+	}
 	
 }

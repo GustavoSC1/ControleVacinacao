@@ -12,6 +12,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import br.com.projeto.dao.LoteDao;
 import br.com.projeto.entities.Lote;
+import br.com.projeto.exception.BusinessException;
+import javax.validation.ConstraintViolationException;
 
 @ExtendWith(MockitoExtension.class)
 public class LoteServiceTest {
@@ -43,6 +45,35 @@ public class LoteServiceTest {
 		Assertions.assertEquals(lote.getNomeVacina(), "Coronavac");
 		Assertions.assertEquals(lote.getInstituicao(), "Instituto Butantan");
 		Assertions.assertEquals(lote.getNumeroLote(), "J202106025");
+	}
+        
+        @Test
+	public void naoDeveInserirComNumeroLoteDuplicado() {
+		// Cenário
+		Lote lote = new Lote(2, "Coronavac", "Instituto Butantan", "J202106025", LocalDate.of(2021, 10, 23), LocalDate.of(2021, 12, 23));
+		Mockito.when(loteDao.existsByNumeroLote(lote.getNumeroLote())).thenReturn(true);	
+		String mensagemEsperada = "Lote já cadastrado";
+		
+		// Execução
+		Exception exception = Assertions.assertThrows(BusinessException.class, () -> loteService.insert(lote));	
+				 
+		String mensagemAtual = exception.getMessage();
+		
+		Assertions.assertTrue(mensagemAtual.contains(mensagemEsperada));
+		
+	}
+        
+        @Test
+	public void naoDeveInserirNumeroLoteComDadosInsuficientes() {
+		// Execução
+		Exception exception = Assertions.assertThrows(ConstraintViolationException.class, () -> loteService.insert(new Lote()));	
+		String mensagemAtual = exception.getMessage();
+
+		Assertions.assertTrue(mensagemAtual.contains("O Nome da vacina não pode ser vazio"));
+		Assertions.assertTrue(mensagemAtual.contains("O Nome da instituição não pode ser vazio"));
+		Assertions.assertTrue(mensagemAtual.contains("O Número do Lote não pode ser vazio"));
+		Assertions.assertTrue(mensagemAtual.contains("A Data de Fabricação não pode ser vazia"));
+                Assertions.assertTrue(mensagemAtual.contains("A Data de Validade não pode ser vazia"));
 	}
 
 }

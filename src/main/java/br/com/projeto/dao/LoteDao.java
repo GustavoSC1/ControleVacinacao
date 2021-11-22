@@ -1,6 +1,7 @@
 package br.com.projeto.dao;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 import br.com.projeto.entities.Lote;
 
@@ -28,4 +29,5 @@ public class LoteDao {
 		boolean exists = typedQuery.getSingleResult();
 		return exists;
 	}
+
 }

@@ -1,4 +1,4 @@
-package br.com.projeto.service.dao;
+package br.com.projeto.dao;
 
 import java.time.LocalDate;
 
@@ -13,7 +13,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import br.com.projeto.dao.FuncionarioDao;
 import br.com.projeto.entities.Funcionario;
 
 public class FuncionarioDaoTest {

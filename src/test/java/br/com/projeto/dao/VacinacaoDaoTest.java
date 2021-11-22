@@ -1,4 +1,4 @@
-package br.com.projeto.service.dao;
+package br.com.projeto.dao;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -14,10 +14,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import br.com.projeto.dao.CidadaoDao;
-import br.com.projeto.dao.FuncionarioDao;
-import br.com.projeto.dao.LoteDao;
-import br.com.projeto.dao.VacinacaoDao;
 import br.com.projeto.entities.Cidadao;
 import br.com.projeto.entities.Funcionario;
 import br.com.projeto.entities.Lote;
@@ -121,7 +117,6 @@ public class VacinacaoDaoTest {
 		Assertions.assertEquals(vacinacoes.get(1).getDose(), "Segunda");
 		Assertions.assertEquals(vacinacoes.get(1).getFuncionario(), funcionario);
 		Assertions.assertEquals(vacinacoes.get(1).getCidadao(), cidadao);
-		Assertions.assertEquals(vacinacoes.get(1).getLote(), lote2);
-	
+		Assertions.assertEquals(vacinacoes.get(1).getLote(), lote2);	
 	}
 }

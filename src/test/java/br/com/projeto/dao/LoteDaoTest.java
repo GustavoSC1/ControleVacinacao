@@ -1,4 +1,4 @@
-package br.com.projeto.service.dao;
+package br.com.projeto.dao;
 
 import java.time.LocalDate;
 
@@ -13,15 +13,14 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import br.com.projeto.dao.CidadaoDao;
-import br.com.projeto.entities.Cidadao;
+import br.com.projeto.entities.Lote;
 
-public class CidadaoDaoTest {
+public class LoteDaoTest {
 	
 	private static EntityManagerFactory entityManagerFactory;
 	private EntityManager entityManager;
 	
-	private CidadaoDao cidadaoDao;
+	private LoteDao loteDao;
 	
 	@BeforeAll
 	public static void setupClass() {
@@ -36,29 +35,29 @@ public class CidadaoDaoTest {
 	@BeforeEach
 	public void setup() {
 		entityManager = entityManagerFactory.createEntityManager();
-		cidadaoDao = new CidadaoDao(entityManager);
+		loteDao = new LoteDao(entityManager);
 	}
 	
 	@AfterEach
 	public void tearDown() {
 		entityManager.close();
 	}
-		
+	
 	@Test
-	public void deveInserirNovoCidadao() {
+	public void deveInserirNovoLote() {
 		// Cenario
-		Cidadao cidadao = new Cidadao(1, "Julio Renan Galvão", LocalDate.of(1990, 4, 21), "52789792917", 'M', "Rua Rubi, 169 - Guarapari/ES", "797564326757645");
+		Lote lote  = new Lote(1, "Coronavac", "Instituto Butantan", "J202106025", LocalDate.of(2021, 10, 23), LocalDate.of(2021, 12, 23));
 		
 		// Execução
-		cidadaoDao.insert(cidadao);
-		
-		cidadao = cidadaoDao.findById(cidadao.getId());
+		loteDao.insert(lote);
+
+		lote = loteDao.findById(lote.getId());
 		
 		// Verificação
-		Assertions.assertEquals(cidadao.getId(), 1);
-		Assertions.assertEquals(cidadao.getNome(), "Julio Renan Galvão");
-		Assertions.assertEquals(cidadao.getCpf(), "52789792917");
-		Assertions.assertEquals(cidadao.getCartaoSus(), "797564326757645");
+		Assertions.assertEquals(lote.getId(), 1);
+		Assertions.assertEquals(lote.getNomeVacina(), "Coronavac");
+		Assertions.assertEquals(lote.getInstituicao(), "Instituto Butantan");
+		Assertions.assertEquals(lote.getNumeroLote(), "J202106025");
 	}
-
+	
 }

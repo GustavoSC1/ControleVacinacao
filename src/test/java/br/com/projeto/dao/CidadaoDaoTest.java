@@ -1,4 +1,4 @@
-package br.com.projeto.service.dao;
+package br.com.projeto.dao;
 
 import java.time.LocalDate;
 
@@ -13,15 +13,14 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import br.com.projeto.dao.LoteDao;
-import br.com.projeto.entities.Lote;
+import br.com.projeto.entities.Cidadao;
 
-public class LoteDaoTest {
+public class CidadaoDaoTest {
 	
 	private static EntityManagerFactory entityManagerFactory;
 	private EntityManager entityManager;
 	
-	private LoteDao loteDao;
+	private CidadaoDao cidadaoDao;
 	
 	@BeforeAll
 	public static void setupClass() {
@@ -36,29 +35,29 @@ public class LoteDaoTest {
 	@BeforeEach
 	public void setup() {
 		entityManager = entityManagerFactory.createEntityManager();
-		loteDao = new LoteDao(entityManager);
+		cidadaoDao = new CidadaoDao(entityManager);
 	}
 	
 	@AfterEach
 	public void tearDown() {
 		entityManager.close();
 	}
-	
+		
 	@Test
-	public void deveInserirNovoLote() {
+	public void deveInserirNovoCidadao() {
 		// Cenario
-		Lote lote  = new Lote(1, "Coronavac", "Instituto Butantan", "J202106025", LocalDate.of(2021, 10, 23), LocalDate.of(2021, 12, 23));
+		Cidadao cidadao = new Cidadao(1, "Julio Renan Galvão", LocalDate.of(1990, 4, 21), "52789792917", 'M', "Rua Rubi, 169 - Guarapari/ES", "797564326757645");
 		
 		// Execução
-		loteDao.insert(lote);
-
-		lote = loteDao.findById(lote.getId());
+		cidadaoDao.insert(cidadao);
+		
+		cidadao = cidadaoDao.findById(cidadao.getId());
 		
 		// Verificação
-		Assertions.assertEquals(lote.getId(), 1);
-		Assertions.assertEquals(lote.getNomeVacina(), "Coronavac");
-		Assertions.assertEquals(lote.getInstituicao(), "Instituto Butantan");
-		Assertions.assertEquals(lote.getNumeroLote(), "J202106025");
+		Assertions.assertEquals(cidadao.getId(), 1);
+		Assertions.assertEquals(cidadao.getNome(), "Julio Renan Galvão");
+		Assertions.assertEquals(cidadao.getCpf(), "52789792917");
+		Assertions.assertEquals(cidadao.getCartaoSus(), "797564326757645");
 	}
-	
+
 }

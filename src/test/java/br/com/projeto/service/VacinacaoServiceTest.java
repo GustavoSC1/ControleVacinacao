@@ -19,6 +19,9 @@ import br.com.projeto.entities.Cidadao;
 import br.com.projeto.entities.Funcionario;
 import br.com.projeto.entities.Lote;
 import br.com.projeto.entities.Vacinacao;
+import br.com.projeto.entities.utils.Dose;
+import br.com.projeto.entities.utils.Relatorio;
+import br.com.projeto.entities.utils.Vacina;
 
 @ExtendWith(MockitoExtension.class)
 public class VacinacaoServiceTest {
@@ -110,6 +113,58 @@ public class VacinacaoServiceTest {
 		Assertions.assertTrue(mensagemAtual.contains("O cidadão não pode ser vazio"));
 		Assertions.assertTrue(mensagemAtual.contains("O lote não pode ser vazio"));
 		Assertions.assertTrue(mensagemAtual.contains("O funcionario não pode ser vazio"));
+	}
+	
+	@Test
+	public void deveGerarRelatorioVacinacao() {
+		// Cenario
+		Vacina vacina = new Vacina("Coronavac", 2);
+		Vacina vacina2 = new Vacina("Pfizer", 0);
+		Vacina vacina3 = new Vacina("AstraZeneca", 2);
+		Vacina vacina4 = new Vacina("Janssen", 1);
+		Dose dose = new Dose("Primeira", 2);
+		Dose dose2 = new Dose("Segunda", 2);
+		Dose dose3 = new Dose("Unica", 1);
+				
+		Relatorio relatorio = new Relatorio();
+		relatorio.getVacinas().add(vacina);
+		relatorio.getVacinas().add(vacina2);
+		relatorio.getVacinas().add(vacina3);
+		relatorio.getVacinas().add(vacina4);
+		relatorio.getDoses().add(dose);
+		relatorio.getDoses().add(dose2);
+		relatorio.getDoses().add(dose3);
+		
+		Mockito.when(vacinacaoDao.getVaccinationReport()).thenReturn(relatorio);
+		
+		// Execução
+		Relatorio relatorioResultado = vacinacaoService.getVaccinationReport();
+		
+		// Verificação
+		Assertions.assertEquals(relatorio.getVacinas().size(), 4);
+		Assertions.assertEquals(relatorio.getDoses().size(), 3);
+		
+		for(Vacina v:relatorioResultado.getVacinas()) {
+			if(v.getNomeVacina() == "Coronavac") {
+				Assertions.assertEquals(v.getNumeroVacinados(), 2);
+			}else if(v.getNomeVacina() == "AstraZeneca") {
+				Assertions.assertEquals(v.getNumeroVacinados(), 2);
+			}else if(v.getNomeVacina() == "Pfizer") {
+				Assertions.assertEquals(v.getNumeroVacinados(), 0);
+			}else if(v.getNomeVacina() == "Janssen") {
+				Assertions.assertEquals(v.getNumeroVacinados(), 1);
+			}
+		}
+		
+		for(Vacina v:relatorioResultado.getVacinas()) {
+			if(v.getNomeVacina() == "Primeira") {
+				Assertions.assertEquals(v.getNumeroVacinados(), 2);
+			}else if(v.getNomeVacina() == "Segunda") {
+				Assertions.assertEquals(v.getNumeroVacinados(), 2);
+			}else if(v.getNomeVacina() == "Unica") {
+				Assertions.assertEquals(v.getNumeroVacinados(), 1);
+			}
+		}
 	}
 	
 }

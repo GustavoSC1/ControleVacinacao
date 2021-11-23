@@ -172,6 +172,7 @@ public class VacinacaoDaoTest {
 		Relatorio relatorio = vacinacaoDao.getVaccinationReport();
 		
 		// Verificação
+		System.out.println(relatorio);
 		Assertions.assertEquals(relatorio.getVacinas().size(), 4);
 		Assertions.assertEquals(relatorio.getDoses().size(), 3);
 		

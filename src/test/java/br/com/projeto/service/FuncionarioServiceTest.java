@@ -38,7 +38,7 @@ public class FuncionarioServiceTest {
 		// Execução
 		funcionarioService.insert(funcionario);
 		
-		funcionario = funcionarioDao.findById(funcionario.getId());
+		funcionario = funcionarioService.findById(funcionario.getId());
 		
 		// Verificação
 		Assertions.assertEquals(funcionario.getId(), 1);

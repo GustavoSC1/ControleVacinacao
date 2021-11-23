@@ -2,7 +2,6 @@ package br.com.projeto.service;
 
 import br.com.projeto.dao.CidadaoDao;
 import br.com.projeto.entities.Cidadao;
-import br.com.projeto.entities.Lote;
 import br.com.projeto.exception.BusinessException;
 import java.util.Set;
 import javax.validation.ConstraintViolation;

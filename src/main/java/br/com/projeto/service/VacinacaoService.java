@@ -11,6 +11,7 @@ import javax.validation.ValidatorFactory;
 
 import br.com.projeto.dao.VacinacaoDao;
 import br.com.projeto.entities.Vacinacao;
+import br.com.projeto.entities.utils.Relatorio;
 
 public class VacinacaoService {
 	
@@ -43,6 +44,10 @@ private Validator validator;
 	
 	public List<Vacinacao> findByCidadao(int id) {		
 		return vacinacaoDao.findByCidadao(id);
+	}
+	
+	public Relatorio getVaccinationReport() {
+		return vacinacaoDao.getVaccinationReport();
 	}
 
 }

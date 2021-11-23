@@ -12,6 +12,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import br.com.projeto.dao.CidadaoDao;
 import br.com.projeto.entities.Cidadao;
+import br.com.projeto.exception.BusinessException;
+import javax.validation.ConstraintViolationException;
 
 @ExtendWith(MockitoExtension.class)
 public class CidadaoServiceTest {
@@ -44,5 +46,36 @@ public class CidadaoServiceTest {
 		Assertions.assertEquals(cidadao.getCpf(), "52789792917");
 		Assertions.assertEquals(cidadao.getCartaoSus(), "797564326757645");
 	}
+        
+        @Test
+        public void naoDeveInserirCidadaoComCpfDuplicado() {
+        // Cenário
+        Cidadao cidadao = new Cidadao(7, "Luciana Clara Bernardes", LocalDate.of(1980, 9, 23), "51722662751", 'F', "Rua Felicidade, 984 - Rio Branco/AC", "12345678");
+        Mockito.when(cidadaoDao.existsByCpf(cidadao.getCpf())).thenReturn(true);
+        String mensagemEsperada = "CPF já cadastrado";
+
+        // Execução
+        Exception exception = Assertions.assertThrows(BusinessException.class, () -> cidadaoService.insert(cidadao));
+
+        String mensagemAtual = exception.getMessage();
+
+        Assertions.assertTrue(mensagemAtual.contains(mensagemEsperada));
+
+    }
+        
+        @Test
+	public void naoDeveInserirCidadaoComDadosInsuficientes() {
+		// Execução
+		Exception exception = Assertions.assertThrows(ConstraintViolationException.class, () -> cidadaoService.insert(new Cidadao()));	
+		String mensagemAtual = exception.getMessage();
+
+		Assertions.assertTrue(mensagemAtual.contains("O Nome não pode ser vazio"));
+		Assertions.assertTrue(mensagemAtual.contains("A Data de Nascimento não pode ser vazia"));
+		Assertions.assertTrue(mensagemAtual.contains("O CPF não pode ser vazio"));
+		Assertions.assertTrue(mensagemAtual.contains("O Endereço não pode ser vazio"));
+                Assertions.assertTrue(mensagemAtual.contains("O Cartão Sus não pode ser vazio"));
+	}
+        
+    
 
 }

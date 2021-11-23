@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="lote")
@@ -12,10 +14,20 @@ public class Lote {
 	
 	@Id
 	private int id;
+        
+        @NotEmpty(message = "O Nome da vacina não pode ser vazio")
 	private String nomeVacina;
+        
+        @NotEmpty(message = "O Nome da instituição não pode ser vazio")
 	private String instituicao;
+        
+        @NotEmpty(message = "O Número do Lote não pode ser vazio")
 	private String numeroLote;
+        
+        @NotNull(message = "A Data de Fabricação não pode ser vazia")
 	private LocalDate dataFabricacao;
+        
+        @NotNull(message = "A Data de Validade não pode ser vazia")
 	private LocalDate dataValidade;
 	
 	public Lote() {

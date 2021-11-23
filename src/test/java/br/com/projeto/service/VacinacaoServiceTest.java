@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.ConstraintViolationException;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -95,5 +97,19 @@ public class VacinacaoServiceTest {
 		Assertions.assertEquals(vacinacoes.get(1).getCidadao(), cidadao);
 		Assertions.assertEquals(vacinacoes.get(1).getLote(), lote2);
 	}
+	
+	@Test
+	public void naoDeveInserirVacinacaoComDadosInsuficientes() {
+		// Execução
+		Exception exception = Assertions.assertThrows(ConstraintViolationException.class, () -> vacinacaoService.insert(new Vacinacao()));		
+		String mensagemAtual = exception.getMessage();
 
+		Assertions.assertTrue(mensagemAtual.contains("O Nome do posto não pode ser vazio"));
+		Assertions.assertTrue(mensagemAtual.contains("A dose não pode ser vazia"));
+		Assertions.assertTrue(mensagemAtual.contains("A Data de vacinação não pode ser vazia"));
+		Assertions.assertTrue(mensagemAtual.contains("O cidadão não pode ser vazio"));
+		Assertions.assertTrue(mensagemAtual.contains("O lote não pode ser vazio"));
+		Assertions.assertTrue(mensagemAtual.contains("O funcionario não pode ser vazio"));
+	}
+	
 }

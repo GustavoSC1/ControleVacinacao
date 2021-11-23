@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="vacinacao")
@@ -15,24 +17,30 @@ public class Vacinacao {
 	@Id
 	private int id;
 	
+	@NotEmpty(message = "O Nome do posto não pode ser vazio")
 	private String estabelecimentoSaude;
 	
+	@NotEmpty(message = "A dose não pode ser vazia")
 	private String dose;
 	
+	@NotNull(message = "A Data de vacinação não pode ser vazia")
 	private LocalDate dataVacinacao;
 	
 	private LocalDate dataProximaDose;
 	
 	@ManyToOne
 	@JoinColumn(name = "cidadao_id")
+	@NotNull(message = "O cidadão não pode ser vazio")
 	private Cidadao cidadao;
 	
 	@ManyToOne
 	@JoinColumn(name = "lote_id")
+	@NotNull(message = "O lote não pode ser vazio")
 	private Lote lote;
 	
 	@ManyToOne
 	@JoinColumn(name = "funcionario_id")
+	@NotNull(message = "O funcionario não pode ser vazio")
 	private Funcionario funcionario;
 	
 	public Vacinacao() {

@@ -1,4 +1,4 @@
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/GustavoSC1/ControleVacinacao/maven)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/GustavoSC1/ControleVacinacao/maven.yml?branch=main)
 ## Descrição
 
 Vocês devem desenvolver um sistema para possibilitar que os profissionais de saúde possam cadastrar e consultar os dados de vacinação durante o processo de aplicação. O objetivo do sistema é permitir que o profissional de saúde possa cadastrar um cidadão, verificar quais vacinas já tomou, cadastrar os lotes das vacinas, cadastrar a vacina aplicada e a data das próximas doses, caso seja necessário. A figura baixo mostra o diagrama de caso de uso do sistema.
